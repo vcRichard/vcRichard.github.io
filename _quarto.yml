@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Who Am I?"
+  title: "Richard von Celsing"
   navbar:
     left:
       - href: index.qmd
