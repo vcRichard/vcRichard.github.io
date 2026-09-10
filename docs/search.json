@@ -1,16 +1,37 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Who Am I?",
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "UBC Vancouver Campus.: University of British Columbia"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nRichard von Celsing\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "Welcome! Let me start with a little about me. I grew up in the UK but went to study at McGill in Montreal for my undergraduate degree. I did a Honours Chemistry major with my hounours research prohject looking at synthesising dendritic macromolecules with the goal of using them for drug delivery.\nAfter graduating I became a research assistant and continued my research project and worked a little on a mechanochemistry synthesis project with another group.\nEventually, I left Canada and returned to the UK to start a career as a Decisioning Consultant at Merkle where I eventually became a Lead Decisioning Architect working with clients across Europe. I later made a career shift to become a Modelling and Data Science Manager. I then decided to leave and further my domain knowledge by enrolling in the UBC Data Science Masters."
+  },
+  {
+    "objectID": "about.html#hobbies",
+    "href": "about.html#hobbies",
+    "title": "About",
+    "section": "Hobbies:",
+    "text": "Hobbies:\nI mainly climb, ski and golf but will really participate most sports that come my way. I like to game and ride motorcycles (though I do not currently own one sadly)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Richard von Celsing",
+    "section": "",
+    "text": "Welcome! Let me start with a little about me. I grew up in the UK but went to study at McGill in Montreal for my undergraduate degree. I did a Honours Chemistry major with my hounours research prohject looking at synthesising dendritic macromolecules with the goal of using them for drug delivery.\nAfter graduating I became a research assistant and continued my research project and worked a little on a mechanochemistry synthesis project with another group.\nEventually, I left Canada and returned to the UK to start a career as a Decisioning Consultant at Merkle where I eventually became a Lead Decisioning Architect working with clients across Europe. I later made a career shift to become a Modelling and Data Science Manager. I then decided to leave and further my domain knowledge by enrolling in the UBC Data Science Masters."
   }
 ]

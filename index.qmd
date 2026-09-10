@@ -1,7 +1,9 @@
 ---
-title: "Richard von Celsing"
+title: Richard von Celsing
+image: linkedin_pic.jpg
+about:
+  template: jolla
 ---
-![](images/linkedin_pic.jpg){width=250px}
 
 Welcome! Let me start with a little about me. I grew up in the UK but went to study at McGill in Montreal for my undergraduate degree. I did a Honours Chemistry major with my hounours research prohject looking at synthesising dendritic macromolecules with the goal of using them for drug delivery.
 
