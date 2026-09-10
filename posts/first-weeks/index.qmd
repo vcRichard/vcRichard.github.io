@@ -1,0 +1,7 @@
+---
+title: "My first weeks in MDS"
+author: "Richard von Celsing"
+date: 2026-09-10
+---
+
+![UBC Vancouver Campus.\nCredit: University of British Columbia](ubc_aerial_photo.jpg)
