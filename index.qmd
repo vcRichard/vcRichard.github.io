@@ -1,12 +1,8 @@
 ---
 title: Richard von Celsing
-image: linkedin_pic.jpg
+image: images/linkedin_pic.jpeg
 about:
   template: jolla
 ---
 
-Welcome! Let me start with a little about me. I grew up in the UK but went to study at McGill in Montreal for my undergraduate degree. I did a Honours Chemistry major with my hounours research prohject looking at synthesising dendritic macromolecules with the goal of using them for drug delivery.
-
-After graduating I became a research assistant and continued my research project and worked a little on a mechanochemistry synthesis project with another group. 
-
-Eventually, I left Canada and returned to the UK to start a career as a Decisioning Consultant at Merkle where I eventually became a Lead Decisioning Architect working with clients across Europe. I later made a career shift to become a Modelling and Data Science Manager. I then decided to leave and further my domain knowledge by enrolling in the UBC Data Science Masters.
+Welcome! I am a data scientist with a background in Chemistry and marketing. I am passionate about leveraging data to achieve real-word outcomes.

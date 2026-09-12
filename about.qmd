@@ -2,7 +2,7 @@
 title: "About"
 ---
 
-Welcome! Let me start with a little about me. I grew up in the UK but went to study at McGill in Montreal for my undergraduate degree. I did a Honours Chemistry major with my hounours research prohject looking at synthesising dendritic macromolecules with the goal of using them for drug delivery.
+Welcome! Let me start with a little about me. I grew up in the UK but went to study at McGill in Montreal for my undergraduate degree. I did an Honours Chemistry major with my honours research project looking at synthesising dendritic macromolecules with the goal of using them for drug delivery.
 
 After graduating I became a research assistant and continued my research project and worked a little on a mechanochemistry synthesis project with another group. 
 

@@ -3,5 +3,6 @@ title: "My first weeks in MDS"
 author: "Richard von Celsing"
 date: 2026-09-10
 ---
+The first three weeks of MDS have been intense. I have already learned a huge amount about new programming tools, languages and tech stacks. My fellow MDS cohort are great, super-friendly and have great insights on our classes. So far the MDS program has been excellent and I am excited to learn more and start digging into modelling.
 
-![UBC Vancouver Campus.\nCredit: University of British Columbia](ubc_aerial_photo.jpg)
+![UBC Vancouver Campus.<br>Credit: University of British Columbia](ubc_aerial_photo.jpg)
