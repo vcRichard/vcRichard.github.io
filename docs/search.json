@@ -4,7 +4,7 @@
     "href": "posts/first-weeks/index.html",
     "title": "My first weeks in MDS",
     "section": "",
-    "text": "The first three weeks of MDS have been intense. I have already learned a huge amount about new programming tools, languages and tech stacks. My fellow MDS cohort are great, super-friendly and have great insights on our classes. So far the MDS program has been excellent and I am excited to learn more and start digging into modelling.\n\n\n\nUBC Vancouver Campus.Credit: University of British Columbia"
+    "text": "Three weeks ago I moved from the UK to Vancouver to start the Master of Data Science at UBC. Coming back to full-time study after several years of working was a strange adjustment. I’d forgotten the rhythm of lectures, labs and deadlines stacked on top of each other. Orientation and the first week of classes went by faster than I expected, and it took a while to stop thinking in terms of project timelines and start thinking in terms of weekly labs.\nThe pace has been the biggest surprise. I came in expecting the statistics to be the hard part and the tooling to be familiar, and it’s been closer to the opposite: the volume of new programming tools, languages and tech stacks in the first few weeks has been relentless. My cohort has made that much easier, and some of the most useful things I’ve picked up have come out of working through problems with the people around me rather than from the lectures themselves.\nThree weeks in, I’m tired but genuinely enjoying it. The parts I’m most looking forward to are still ahead, I want to get into the modelling courses and start applying this to real problems rather than exercises. So far my free time has been limited, but I’m hoping to settle in soon and see more of Vancouver and BC."
   },
   {
     "objectID": "blog.html",
@@ -18,20 +18,34 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Welcome! Let me start with a little about me. I grew up in the UK but went to study at McGill in Montreal for my undergraduate degree. I did an Honours Chemistry major with my honours research project looking at synthesising dendritic macromolecules with the goal of using them for drug delivery.\nAfter graduating I became a research assistant and continued my research project and worked a little on a mechanochemistry synthesis project with another group.\nEventually, I left Canada and returned to the UK to start a career as a Decisioning Consultant at Merkle where I eventually became a Lead Decisioning Architect working with clients across Europe. I later made a career shift to become a Modelling and Data Science Manager. I then decided to leave and further my domain knowledge by enrolling in the UBC Data Science Masters."
+    "text": "I grew up in the UK and went to McGill in Montreal for my undergraduate degree, where I did an Honours Chemistry major. My honours project looked at synthesising dendritic macromolecules for use in drug delivery. After graduating I stayed on as a research assistant, continuing that project and working alongside another group on mechanochemical synthesis.\nI then left Canada for the UK and joined Merkle as a Decisioning Consultant, eventually becoming a Lead Decisioning Architect working with clients across Europe. From there I moved into a Modelling and Data Science Manager role."
   },
   {
-    "objectID": "about.html#hobbies",
-    "href": "about.html#hobbies",
+    "objectID": "about.html#background",
+    "href": "about.html#background",
     "title": "About",
-    "section": "Hobbies:",
-    "text": "Hobbies:\nI mainly climb, ski and golf but will really participate most sports that come my way. I like to game and ride motorcycles (though I do not currently own one sadly)."
+    "section": "",
+    "text": "I grew up in the UK and went to McGill in Montreal for my undergraduate degree, where I did an Honours Chemistry major. My honours project looked at synthesising dendritic macromolecules for use in drug delivery. After graduating I stayed on as a research assistant, continuing that project and working alongside another group on mechanochemical synthesis.\nI then left Canada for the UK and joined Merkle as a Decisioning Consultant, eventually becoming a Lead Decisioning Architect working with clients across Europe. From there I moved into a Modelling and Data Science Manager role."
+  },
+  {
+    "objectID": "about.html#why-data-science",
+    "href": "about.html#why-data-science",
+    "title": "About",
+    "section": "Why data science",
+    "text": "Why data science\nArchitecting decisioning systems meant I spent years close to the models that drove them without ever owning the modelling itself, and moving into a management role only sharpened that. As the field has evolved those models have become steadily more central to how decisioning works, and analysing them was consistently the part of the job I enjoyed most. I came to UBC’s Master of Data Science to build a broader and deeper foundation than I could pick up on the job, and to work with methods I was unlikely to meet in the marketing projects I was on."
+  },
+  {
+    "objectID": "about.html#outside-of-data-science",
+    "href": "about.html#outside-of-data-science",
+    "title": "About",
+    "section": "Outside of data science",
+    "text": "Outside of data science\nI mainly climb, ski and golf, but I’ll take on most sports that come my way. I also game and ride motorcycles, though I don’t currently own one."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Richard von Celsing",
     "section": "",
-    "text": "Welcome! I am a data scientist with a background in Chemistry and marketing. I am passionate about leveraging data to achieve real-word outcomes."
+    "text": "Welcome! I’m Richard, a data scientist who came to the field via an Honours Chemistry degree at McGill and a decade of decisioning and modelling work in the UK. Most recently I was a Modelling and Data Science Manager, and before that a Lead Decisioning Architect at Merkle, working with clients across Europe. I’m now at UBC completing a Master of Data Science, where I’m deepening the statistical and machine learning foundations behind the work I was already doing. After the program I’m hoping to work on complex models in the technology sector."
   }
 ]
