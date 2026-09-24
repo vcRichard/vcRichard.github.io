@@ -1,0 +1,22 @@
+
+```{python}
+import seaborn as sns
+df = sns.load_dataset('titanic')
+df.head()
+```
+
+```{python}
+
+df_class_survival = df[['survived', 'pclass']].groupby('pclass').mean()
+
+df_class_survival.head()
+
+```
+
+```{python}
+
+import matplotlib.pyplot as plt
+
+plt.bar(df_class_survival['pclass'], df_class_survival['survived'])
+
+```

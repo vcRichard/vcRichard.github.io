@@ -2,6 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/running_python_with_quarto/index.html",
+      "/posts/running_python_with_quarto/titanic_analysis.html",
+      "/posts/running_R_with_quarto/Index.html",
       "/posts/first-weeks/index.html"
     ]
   }

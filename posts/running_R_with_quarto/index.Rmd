@@ -1,0 +1,16 @@
+---
+title: "Sharing R Analyses with Quarto"
+output: html_document
+---
+
+```{r}
+rivers
+```
+```{r}
+hist(rivers,
+     breaks = 20,
+     main = "Lengths of Major North American Rivers",
+     xlab = "Length (miles)",
+     col = "steelblue", border = "white")
+```
+
