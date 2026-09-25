@@ -26,7 +26,7 @@ uv sync
 
 `uv sync` builds the Python environment `.venv` from `uv.lock`.
 
-In R, set the working directory to the top level of the repository (vcRichard.github.io) then in the console run:
+In R (I recommend Rstudio but any R environment should work), set the working directory to the top level of the repository (vcRichard.github.io) then in the console run:
 
 ```
 renv::restore()
