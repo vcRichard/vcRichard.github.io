@@ -1,22 +1,75 @@
+---
+title: "Using Python with Quarto to analyse penguin size and flipper length"
+author: "Richard von Celsing"
+date: "2026-09-24"
+---
+
+## Do penguins species body sizes differ and does it correlate with flipper length?
+
+Do the three penguin species at Palmer Station differ in body size and how does flipper length compare to body mass?
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER. The data is released under the CC0 licence and is bundled with the `palmerpenguins` Python package. Citation: Horst AM, Hill AP, Gorman KB (2020). *palmerpenguins: Palmer Archipelago (Antarctica) penguin data.* [doi:10.5281/zenodo.3960218](https://doi.org/10.5281/zenodo.3960218).
 
 ```{python}
-import seaborn as sns
-df = sns.load_dataset('titanic')
-df.head()
-```
-
-```{python}
-
-df_class_survival = df[['survived', 'pclass']].groupby('pclass').mean()
-
-df_class_survival.head()
-
-```
-
-```{python}
-
+ #| message: false
+ #| warning: false
 import matplotlib.pyplot as plt
-
-plt.bar(df_class_survival['pclass'], df_class_survival['survived'])
+from palmerpenguins import load_penguins
 
 ```
+
+## Load, clean and prep data
+
+```{python}
+penguins = load_penguins()
+print(penguins.head())
+print(penguins.shape)
+print(penguins.isna().sum())
+```
+
+The table has 344 penguins. There are 2 NAs in the body_mass_g column and 2 in flipper_length_mm column.
+
+```{python}
+penguin_sizes = penguins[["species","body_mass_g", "flipper_length_mm"]].dropna()
+print(penguin_sizes.shape)
+```
+
+Dropping NA on both columns leaves us with 342 so the NAs must have been for the same penguins.
+
+## Summarise size by species
+
+```{python}
+summary = penguin_sizes.groupby("species").agg(
+    number_of_penguins = ("species", "count"),
+    mean_mass_g=("body_mass_g", "mean"),
+    mean_flipper_mm=("flipper_length_mm", "mean"),
+).round(1)
+
+summary = summary.reset_index()
+summary
+```
+
+Adelie and Chinstrap penguins are almost the same mass, about 3700 g on average. Gentoo penguins are much heavier at about 5076 g, and they also have the longest flippers, about 217 mm.
+
+## Plot flipper length against body mass
+
+```{python}
+#| label: fig-penguin-mass-length
+#| fig-cap: "Body mass against flipper length with penguins by species."
+fig, ax = plt.subplots(figsize=(7, 5))
+
+for species, group in penguin_sizes.groupby("species"):
+    ax.scatter(group["flipper_length_mm"], group["body_mass_g"],
+               label=species)
+
+ax.set_xlabel("Flipper length (mm)")
+ax.set_ylabel("Body mass (g)")
+ax.legend(title="Species")
+plt.show()
+```
+
+## Conclusion
+
+@fig-penguin-mass-length shows a clear upward trend between body mass and flipper, as body masse increases so does flipper length. Gentoo penguins form their own cluster at the top right as the are the biggest for both metrics. Adelie and Chinstrap on ther other hand overlap heavily.
+
+This analysis shows that there is some association between the two but further work needs to establish the relationship more rigorously.
