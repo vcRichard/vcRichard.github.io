@@ -26,7 +26,7 @@ uv sync
 
 `uv sync` builds the Python environment `.venv` from `uv.lock`.
 
-In R (I recommend Rstudio but any R environment should work), set the working directory to the top level of the repository (vcRichard.github.io) then in the console run:
+In R (I recommend Rstudio but any R environment should work), set the working directory to the top level of the repository (vcRichard.github.io). The easiest way is to open the Rproject file `vcRichard.github.io.Rproj` in the repository. Then in the console run:
 
 ```
 renv::restore()
@@ -34,7 +34,7 @@ renv::restore()
 
 Answer `y` if renv asks for permission. This installs the R packages listed in `renv.lock`.
 
-Back to the terminal, make the working directory (vcRichard.github.io) and run:
+Back to the terminal, make sure the working directory is vcRichard.github.io and run:
 
 ```
 uv run quarto render
