@@ -209,16 +209,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="do-penguins-species-body-sizes-differ-and-does-it-correlate-with-flipper-length">Do penguins species body sizes differ and does it correlate with flipper length?</h2>
 <p>Do the three penguin species at Palmer Station differ in body size and how does flipper length compare to body mass?</p>
 <p>Data: <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a>, Palmer Station Antarctica LTER. The data is released under the CC0 licence and is bundled with the <code>palmerpenguins</code> Python package. Citation: Horst AM, Hill AP, Gorman KB (2020). <em>palmerpenguins: Palmer Archipelago (Antarctica) penguin data.</em> <a href="https://doi.org/10.5281/zenodo.3960218">doi:10.5281/zenodo.3960218</a>.</p>
-<div id="e0c17c40" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#| message: false</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="co">#| warning: false</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6ef39c84" class="cell" data-message="false" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="load-clean-and-prep-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-clean-and-prep-data">Load, clean and prep data</h2>
-<div id="c19bb023" class="cell" data-execution_count="2">
+<div id="c8dcfd99" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.head())</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.shape)</span>
@@ -250,7 +248,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>The table has 344 penguins. There are 2 NAs in the body_mass_g column and 2 in flipper_length_mm column.</p>
-<div id="d34fac45" class="cell" data-execution_count="3">
+<div id="0f3996d5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguin_sizes <span class="op">=</span> penguins[[<span class="st">"species"</span>,<span class="st">"body_mass_g"</span>, <span class="st">"flipper_length_mm"</span>]].dropna()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguin_sizes.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -261,7 +259,7 @@ dtype: int64</code></pre>
 </section>
 <section id="summarise-size-by-species" class="level2">
 <h2 class="anchored" data-anchor-id="summarise-size-by-species">Summarise size by species</h2>
-<div id="c44d86e1" class="cell" data-execution_count="4">
+<div id="8650902f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> penguin_sizes.groupby(<span class="st">"species"</span>).agg(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    number_of_penguins <span class="op">=</span> (<span class="st">"species"</span>, <span class="st">"count"</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    mean_mass_g<span class="op">=</span>(<span class="st">"body_mass_g"</span>, <span class="st">"mean"</span>),</span>
