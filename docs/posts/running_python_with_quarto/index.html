@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Richard von Celsing">
+<meta name="dcterms.date" content="2026-09-24">
 
-<title>index – Richard von Celsing</title>
+<title>Using Python with Quarto to analyse penguin size and flipper length – Richard von Celsing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,10 +28,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,6 +110,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -118,17 +158,196 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#do-penguins-species-body-sizes-differ-and-does-it-correlate-with-flipper-length" id="toc-do-penguins-species-body-sizes-differ-and-does-it-correlate-with-flipper-length" class="nav-link active" data-scroll-target="#do-penguins-species-body-sizes-differ-and-does-it-correlate-with-flipper-length">Do penguins species body sizes differ and does it correlate with flipper length?</a></li>
+  <li><a href="#load-clean-and-prep-data" id="toc-load-clean-and-prep-data" class="nav-link" data-scroll-target="#load-clean-and-prep-data">Load, clean and prep data</a></li>
+  <li><a href="#summarise-size-by-species" id="toc-summarise-size-by-species" class="nav-link" data-scroll-target="#summarise-size-by-species">Summarise size by species</a></li>
+  <li><a href="#plot-flipper-length-against-body-mass" id="toc-plot-flipper-length-against-body-mass" class="nav-link" data-scroll-target="#plot-flipper-length-against-body-mass">Plot flipper length against body mass</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using Python with Quarto to analyse penguin size and flipper length</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Richard von Celsing </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
+
+<section id="do-penguins-species-body-sizes-differ-and-does-it-correlate-with-flipper-length" class="level2">
+<h2 class="anchored" data-anchor-id="do-penguins-species-body-sizes-differ-and-does-it-correlate-with-flipper-length">Do penguins species body sizes differ and does it correlate with flipper length?</h2>
+<p>Do the three penguin species at Palmer Station differ in body size and how does flipper length compare to body mass?</p>
+<p>Data: <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a>, Palmer Station Antarctica LTER. The data is released under the CC0 licence and is bundled with the <code>palmerpenguins</code> Python package. Citation: Horst AM, Hill AP, Gorman KB (2020). <em>palmerpenguins: Palmer Archipelago (Antarctica) penguin data.</em> <a href="https://doi.org/10.5281/zenodo.3960218">doi:10.5281/zenodo.3960218</a>.</p>
+<div id="e0c17c40" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#| message: false</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="co">#| warning: false</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="load-clean-and-prep-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-clean-and-prep-data">Load, clean and prep data</h2>
+<div id="c19bb023" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.head())</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.shape)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.isna().<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  \
+0  Adelie  Torgersen            39.1           18.7              181.0   
+1  Adelie  Torgersen            39.5           17.4              186.0   
+2  Adelie  Torgersen            40.3           18.0              195.0   
+3  Adelie  Torgersen             NaN            NaN                NaN   
+4  Adelie  Torgersen            36.7           19.3              193.0   
+
+   body_mass_g     sex  year  
+0       3750.0    male  2007  
+1       3800.0  female  2007  
+2       3250.0  female  2007  
+3          NaN     NaN  2007  
+4       3450.0  female  2007  
+(344, 8)
+species               0
+island                0
+bill_length_mm        2
+bill_depth_mm         2
+flipper_length_mm     2
+body_mass_g           2
+sex                  11
+year                  0
+dtype: int64</code></pre>
+</div>
+</div>
+<p>The table has 344 penguins. There are 2 NAs in the body_mass_g column and 2 in flipper_length_mm column.</p>
+<div id="d34fac45" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguin_sizes <span class="op">=</span> penguins[[<span class="st">"species"</span>,<span class="st">"body_mass_g"</span>, <span class="st">"flipper_length_mm"</span>]].dropna()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguin_sizes.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(342, 3)</code></pre>
+</div>
+</div>
+<p>Dropping NA on both columns leaves us with 342 so the NAs must have been for the same penguins.</p>
+</section>
+<section id="summarise-size-by-species" class="level2">
+<h2 class="anchored" data-anchor-id="summarise-size-by-species">Summarise size by species</h2>
+<div id="c44d86e1" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> penguin_sizes.groupby(<span class="st">"species"</span>).agg(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    number_of_penguins <span class="op">=</span> (<span class="st">"species"</span>, <span class="st">"count"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    mean_mass_g<span class="op">=</span>(<span class="st">"body_mass_g"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    mean_flipper_mm<span class="op">=</span>(<span class="st">"flipper_length_mm"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> summary.reset_index()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">number_of_penguins</th>
+<th data-quarto-table-cell-role="th">mean_mass_g</th>
+<th data-quarto-table-cell-role="th">mean_flipper_mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Adelie</td>
+<td>151</td>
+<td>3700.7</td>
+<td>190.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Chinstrap</td>
+<td>68</td>
+<td>3733.1</td>
+<td>195.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Gentoo</td>
+<td>123</td>
+<td>5076.0</td>
+<td>217.2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Adelie and Chinstrap penguins are almost the same mass, about 3700 g on average. Gentoo penguins are much heavier at about 5076 g, and they also have the longest flippers, about 217 mm.</p>
+</section>
+<section id="plot-flipper-length-against-body-mass" class="level2">
+<h2 class="anchored" data-anchor-id="plot-flipper-length-against-body-mass">Plot flipper length against body mass</h2>
+<div id="cell-fig-penguin-mass-length" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> species, group <span class="kw">in</span> penguin_sizes.groupby(<span class="st">"species"</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    ax.scatter(group[<span class="st">"flipper_length_mm"</span>], group[<span class="st">"body_mass_g"</span>],</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span>species)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Flipper length (mm)"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Body mass (g)"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">"Species"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-penguin-mass-length" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-penguin-mass-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-penguin-mass-length-output-1.png" width="602" height="431" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-penguin-mass-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Body mass against flipper length with penguins by species.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p><a href="#fig-penguin-mass-length" class="quarto-xref">Figure&nbsp;1</a> shows a clear upward trend between body mass and flipper, as body masse increases so does flipper length. Gentoo penguins form their own cluster at the top right as the are the biggest for both metrics. Adelie and Chinstrap on ther other hand overlap heavily.</p>
+<p>This analysis shows that there is some association between the two but further work needs to establish the relationship more rigorously.</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

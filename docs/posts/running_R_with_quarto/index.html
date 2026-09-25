@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Richard von Celsing">
+<meta name="dcterms.date" content="2026-09-24">
 
-<title>titanic_analysis – Richard von Celsing</title>
+<title>Using R with Quarto to analyse penguin size and flipper length – Richard von Celsing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -153,20 +155,154 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#do-penguin-species-differ-in-body-size-and-how-does-flipper-length-relate-to-body-mass" id="toc-do-penguin-species-differ-in-body-size-and-how-does-flipper-length-relate-to-body-mass" class="nav-link active" data-scroll-target="#do-penguin-species-differ-in-body-size-and-how-does-flipper-length-relate-to-body-mass">Do penguin species differ in body size, and how does flipper length relate to body mass?</a></li>
+  <li><a href="#load-clean-and-prep-data" id="toc-load-clean-and-prep-data" class="nav-link" data-scroll-target="#load-clean-and-prep-data">Load, clean and prep data</a></li>
+  <li><a href="#summarise-size-by-species" id="toc-summarise-size-by-species" class="nav-link" data-scroll-target="#summarise-size-by-species">Summarise size by species</a></li>
+  <li><a href="#plot-flipper-length-against-body-mass" id="toc-plot-flipper-length-against-body-mass" class="nav-link" data-scroll-target="#plot-flipper-length-against-body-mass">Plot flipper length against body mass</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
-
-
-
-<div id="59a4bf3b" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>penguins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using R with Quarto to analyse penguin size and flipper length</h1>
 </div>
 
 
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Richard von Celsing </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="do-penguin-species-differ-in-body-size-and-how-does-flipper-length-relate-to-body-mass" class="level2">
+<h2 class="anchored" data-anchor-id="do-penguin-species-differ-in-body-size-and-how-does-flipper-length-relate-to-body-mass">Do penguin species differ in body size, and how does flipper length relate to body mass?</h2>
+<p>Data: <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a>, Palmer Station Antarctica LTER. The data is released under the CC0 licence and is bundled with the <code>palmerpenguins</code> R package, so the build needs no network connection. Citation: Horst AM, Hill AP, Gorman KB (2020). <em>palmerpenguins: Palmer Archipelago (Antarctica) penguin data.</em> <a href="https://doi.org/10.5281/zenodo.3960218">doi:10.5281/zenodo.3960218</a>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="load-clean-and-prep-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-clean-and-prep-data">Load, clean and prep data</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7               181        3750
+2 Adelie  Torgersen           39.5          17.4               186        3800
+3 Adelie  Torgersen           40.3          18                 195        3250
+4 Adelie  Torgersen           NA            NA                  NA          NA
+5 Adelie  Torgersen           36.7          19.3               193        3450
+6 Adelie  Torgersen           39.3          20.6               190        3650
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 344</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(body_mass_g) <span class="sc">|</span> <span class="fu">is.na</span>(flipper_length_mm)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g, flipper_length_mm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  species body_mass_g flipper_length_mm
+  &lt;fct&gt;         &lt;int&gt;             &lt;int&gt;
+1 Adelie           NA                NA
+2 Gentoo           NA                NA</code></pre>
+</div>
+</div>
+<p>The table has 344 penguins. There are 2 missing values in <code>body_mass_g</code> and 2 in <code>flipper_length_mm</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>penguin_sizes <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g, flipper_length_mm) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(penguin_sizes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 342</code></pre>
+</div>
+</div>
+<p>Dropping rows with missing values leaves 342 penguins, so the missing values must belong to the same two penguins.</p>
+</section>
+<section id="summarise-size-by-species" class="level2">
+<h2 class="anchored" data-anchor-id="summarise-size-by-species">Summarise size by species</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>summary_by_species <span class="ot">&lt;-</span> penguin_sizes <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">number_of_penguins =</span> <span class="fu">n</span>(),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mass_g =</span> <span class="fu">round</span>(<span class="fu">mean</span>(body_mass_g), <span class="dv">1</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_flipper_mm =</span> <span class="fu">round</span>(<span class="fu">mean</span>(flipper_length_mm), <span class="dv">1</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>summary_by_species</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  species   number_of_penguins mean_mass_g mean_flipper_mm
+  &lt;fct&gt;                  &lt;int&gt;       &lt;dbl&gt;           &lt;dbl&gt;
+1 Adelie                   151       3701.            190 
+2 Chinstrap                 68       3733.            196.
+3 Gentoo                   123       5076             217.</code></pre>
+</div>
+</div>
+<p>Adelie and Chinstrap penguins are almost the same mass, about 3700 g on average. Gentoo penguins are much heavier at about 5076 g, and they also have the longest flippers, about 217 mm.</p>
+</section>
+<section id="plot-flipper-length-against-body-mass" class="level2">
+<h2 class="anchored" data-anchor-id="plot-flipper-length-against-body-mass">Plot flipper length against body mass</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguin_sizes, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Flipper length (mm)"</span>, <span class="at">y =</span> <span class="st">"Body mass (g)"</span>, <span class="at">colour =</span> <span class="st">"Species"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-penguin-mass-length" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-penguin-mass-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-penguin-mass-length-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-penguin-mass-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Body mass against flipper length, coloured by species.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p><a href="#fig-penguin-mass-length" class="quarto-xref">Figure&nbsp;1</a> shows that penguins with longer flippers tend to be heavier. Gentoo penguins form their own cluster at the top right because they are the largest on both measures. Adelie and Chinstrap overlap heavily.</p>
+<p>This shows an association between the two measurements only. It does not show that one causes the other, and I did not test the relationship formally.</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
