@@ -70,4 +70,4 @@ ggplot(penguin_sizes, aes(x = flipper_length_mm, y = body_mass_g, colour = speci
 
 @fig-penguin-mass-length shows that penguins with longer flippers tend to be heavier. Gentoo penguins form their own cluster at the top right because they are the largest on both measures. Adelie and Chinstrap overlap heavily.
 
-This shows an association between the two measurements only. It does not show that one causes the other, and I did not test the relationship formally.
+This shows an association between the two measurements only. It does not show that one causes the other, and I did not test the relationship formally. 
