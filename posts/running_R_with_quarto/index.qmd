@@ -1,0 +1,73 @@
+---
+title: "Using R with Quarto to analyse penguin size and flipper length"
+author: "Richard von Celsing"
+date: "2026-09-24"
+---
+
+## Do penguin species differ in body size, and how does flipper length relate to body mass?
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER. The data is released under the CC0 licence and is bundled with the `palmerpenguins` R package, so the build needs no network connection. Citation: Horst AM, Hill AP, Gorman KB (2020). *palmerpenguins: Palmer Archipelago (Antarctica) penguin data.* [doi:10.5281/zenodo.3960218](https://doi.org/10.5281/zenodo.3960218).
+
+```{r}
+#| message: false
+#| warning: false
+library(palmerpenguins)
+library(tidyverse)
+library(ggplot2)
+```
+
+## Load, clean and prep data
+
+```{r}
+head(penguins)
+nrow(penguins)
+penguins |>
+  filter(is.na(body_mass_g) | is.na(flipper_length_mm)) |>
+  select(species, body_mass_g, flipper_length_mm)
+
+
+```
+
+The table has 344 penguins. There are 2 missing values in `body_mass_g` and 2 in `flipper_length_mm`.
+
+```{r}
+penguin_sizes <- penguins |>
+  select(species, body_mass_g, flipper_length_mm) |>
+  drop_na()
+nrow(penguin_sizes)
+```
+
+Dropping rows with missing values leaves 342 penguins, so the missing values must belong to the same two penguins.
+
+
+## Summarise size by species
+
+```{r}
+summary_by_species <- penguin_sizes |>
+  group_by(species) |>
+  summarise(
+    number_of_penguins = n(),
+    mean_mass_g = round(mean(body_mass_g), 1),
+    mean_flipper_mm = round(mean(flipper_length_mm), 1)
+  )
+summary_by_species
+```
+
+Adelie and Chinstrap penguins are almost the same mass, about 3700 g on average. Gentoo penguins are much heavier at about 5076 g, and they also have the longest flippers, about 217 mm.
+
+
+## Plot flipper length against body mass
+
+```{r}
+#| label: fig-penguin-mass-length
+#| fig-cap: "Body mass against flipper length, coloured by species."
+ggplot(penguin_sizes, aes(x = flipper_length_mm, y = body_mass_g, colour = species)) +
+  geom_point() +
+  labs(x = "Flipper length (mm)", y = "Body mass (g)", colour = "Species")
+```
+
+## Conclusion
+
+@fig-penguin-mass-length shows that penguins with longer flippers tend to be heavier. Gentoo penguins form their own cluster at the top right because they are the largest on both measures. Adelie and Chinstrap overlap heavily.
+
+This shows an association between the two measurements only. It does not show that one causes the other, and I did not test the relationship formally.
